@@ -27,8 +27,8 @@
         "label":"USR-A",
         "uuid":"7130c94a-213a-4e5a-8e26-6cce9662f132",
         "type":"flatcar-rootfs",
-        "blocks":"2097152",
-        "fs_blocks":"260094",
+        "blocks":"3097152",
+        "fs_blocks":"360094",
         "fs_type":"ext2",
         "mount":"/usr",
         "features": ["prioritize", "verity"]
