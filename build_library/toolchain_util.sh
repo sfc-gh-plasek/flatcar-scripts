@@ -371,7 +371,7 @@ install_cross_libs() {
     # In order to get a dependency list we must calculate it before
     # updating package.provided. Otherwise portage will no-op.
     $sudo rm -f "${package_provided}/cross-${cross_chost}"
-    local cross_deps=$(ROOT="$ROOT" _get_dependency_list \
+    local cross_deps=$(ROOT="$ROOT" printf '=sys-apps/gentoo-functions-0.12\n=dev-libs/gmp-6.1.2\n=sys-libs/timezone-data-2019c\n=sys-libs/zlib-1.2.11-r2\n=virtual/libiconv-0-r2\n=dev-libs/mpfr-3.1.6\n=dev-libs/mpc-1.0.3\n' \
         "$@" "${TOOLCHAIN_PKGS[@]}" | $sudo tee \
         "$ROOT/etc/portage/cross-${cross_chost}-depends")
 
