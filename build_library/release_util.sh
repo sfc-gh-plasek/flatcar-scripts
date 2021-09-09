@@ -130,7 +130,6 @@ sign_and_upload_files() {
         local file
         local sigfile
         local sigdir=$(mktemp --directory)
-        trap "rm -rf ${sigdir}" RETURN
         for file in "$@"; do
             if [[ "${file}" =~ \.(asc|gpg|sig)$ ]]; then
                 continue
@@ -150,6 +149,7 @@ sign_and_upload_files() {
     fi
 
     upload_files "${msg}" "${path}" "${suffix}" "$@" "${sigs[@]}"
+    rm -rf "${sigdir}"
 }
 
 upload_packages() {
