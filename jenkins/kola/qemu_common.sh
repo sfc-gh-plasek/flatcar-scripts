@@ -97,6 +97,28 @@ bin/cork download-image \
     --verify=true $verify_key
 enter lbunzip2 -k -f /mnt/host/source/tmp/flatcar_production_image.bin.bz2
 
+# BEGIN MY OWN MANTLE HACK
+mkdir -p tmp/mantle
+git clone --depth=1 --branch=krnowak/debug-ping https://github.com/flatcar-linux/mantle.git tmp/mantle/repo
+pushd tmp/mantle/repo
+# So git describe --dirty in mantle's ./build script won't
+# complain. There are no annotated tags, because I did a shallow
+# clone.
+git \
+    -c user.name='Foo Bar' \
+    -c user.email='foo@example.com' \
+    tag -a v99.99.99 -m 'ajwaj'
+# Stolen from mantle's Jenkinsfile
+docker run --rm -e CGO_ENABLED=0 -e GOARCH=arm64 -e GOCACHE=/usr/src/myapp/cache -u "$(id -u):$(id -g)" -v /etc/passwd:/etc/passwd:ro -v /etc/group:/etc/group:ro -v "$PWD":/usr/src/myapp -w /usr/src/myapp golang:1.16 ./build
+mv bin bin.arm64
+docker run --rm -e CGO_ENABLED=1 -e GOARCH=amd64 -e GOCACHE=/usr/src/myapp/cache -u "$(id -u):$(id -g)" -v /etc/passwd:/etc/passwd:ro -v /etc/group:/etc/group:ro -v "$PWD":/usr/src/myapp -w /usr/src/myapp golang:1.16 ./build
+popd
+# Replace mantle binaries with those just built.
+rm -rf bin bin.arm64
+mv tmp/mantle/repo/bin bin
+mv tmp/mantle/repo/bin.arm64 bin.arm64
+# END MY OWN MANTLE HACK
+
 # create folder to handle case where arm64 is missing
 sudo mkdir -p chroot/usr/lib/kola/{arm64,amd64}
 # copy all of the latest mantle binaries into the chroot
