@@ -110,6 +110,7 @@ main-repo = portage-stable
 
 [gentoo]
 disabled = true
+location = /dev/null
 
 [coreos]
 location = ${COREOS_OVERLAY}

@@ -245,14 +245,16 @@ else
     sudo touch "${BOARD_ETC}/portage/make.conf.user"
 fi
 
+portdir_overlay=($(portageq get_repo_path / x-crossdev coreos))
+
 sudo_clobber "${BOARD_ETC}/portage/make.conf" <<EOF
 # Created by setup_board
 
 # Settings derived from the host environment
 CBUILD="$(portageq envvar CHOST)"
 HOSTCC="$(portageq envvar CHOST)-gcc"
-PORTDIR="$(portageq envvar PORTDIR)"
-PORTDIR_OVERLAY="$(portageq envvar PORTDIR_OVERLAY)"
+PORTDIR="$(portageq get_repo_path / portage-stable)"
+PORTDIR_OVERLAY="${portdir_overlay}"
 DISTDIR="$(portageq envvar DISTDIR)"
 MAKEOPTS="$(portageq envvar MAKEOPTS)"
 PORTAGE_USERNAME="$(portageq envvar PORTAGE_USERNAME)"

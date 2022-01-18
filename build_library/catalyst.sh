@@ -89,6 +89,7 @@ main-repo = portage-stable
 
 [gentoo]
 disabled = true
+location = /dev/null
 
 [coreos]
 location = /var/gentoo/repos/local
