@@ -99,7 +99,7 @@ enter lbunzip2 -k -f /mnt/host/source/tmp/flatcar_production_image.bin.bz2
 
 # BEGIN MY OWN MANTLE HACK
 mkdir -p tmp/mantle
-git clone --depth=1 --branch=krnowak/debug-ping https://github.com/flatcar-linux/mantle.git tmp/mantle/repo
+git clone --depth=1 --branch=krnowak/ignore-udev-links https://github.com/flatcar-linux/mantle.git tmp/mantle/repo
 pushd tmp/mantle/repo
 # So git describe --dirty in mantle's ./build script won't
 # complain. There are no annotated tags, because I did a shallow
