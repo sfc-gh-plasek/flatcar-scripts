@@ -129,8 +129,7 @@ function _vm_build_impl() {
         -v "${vernum}" \
         mv "${CONTAINER_IMAGE_ROOT}/${arch}-usr/" "./${images_out}/"
 
-    cd "images/latest"
-    sign_artifacts "${SIGNER}" *
-    copy_to_buildcache "images/${arch}/${vernum}/" *
+    sign_artifacts "${SIGNER}" "images/latest/"*
+    copy_to_buildcache "images/${arch}/${vernum}/" "images/latest/"*
 }
 # --
