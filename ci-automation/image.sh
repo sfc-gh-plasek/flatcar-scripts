@@ -117,7 +117,7 @@ function _image_build_impl() {
     else
             export CHANNEL_A="${channel}"
     fi
-    export FROM_B="file://${PWD}"
+    export FROM_B="file://${PWD}/images/latest"
     # Use the directory directly (and BOARD_B and CHANNEL_B are unused)
     export VERSION_B="."
     echo "== Image differences compared to ${CHANNEL_A} ${VERSION_A} =="
