@@ -1,5 +1,6 @@
 #!/bin/bash
 set -e
+set -x
 
 source /tmp/chroot-functions.sh
 source /tmp/toolchain_util.sh
