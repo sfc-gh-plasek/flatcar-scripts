@@ -110,16 +110,11 @@ function _vm_build_impl() {
 
     for format in ${formats}; do
         echo " ###################  VENDOR '${format}' ################### "
-        COMPRESSION_FORMAT="bz2"
-        if [[ "${format}" =~ ^(openstack|openstack_mini|digitalocean)$ ]];then
-            COMPRESSION_FORMAT="gz,bz2"
-        fi
         ./run_sdk_container -n "${vms_container}" -C "${packages_image}" \
             -v "${vernum}" \
             ./image_to_vm.sh --format "${format}" --board="${arch}-usr" \
                 --from "${CONTAINER_IMAGE_ROOT}/${arch}-usr/latest-input" \
-                --to "${CONTAINER_IMAGE_ROOT}/${arch}-usr/latest" \
-                --image_compression_formats="${COMPRESSION_FORMAT}"
+                --to "${CONTAINER_IMAGE_ROOT}/${arch}-usr/latest"
     done
 
     # copy resulting images + push to buildcache
