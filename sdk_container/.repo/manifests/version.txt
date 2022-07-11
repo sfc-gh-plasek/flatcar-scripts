@@ -1,4 +1,4 @@
-FLATCAR_VERSION=3292.0.0+nightly-20220706-2100
-FLATCAR_VERSION_ID=3292.0.0
-FLATCAR_BUILD_ID="nightly-20220706-2100"
-FLATCAR_SDK_VERSION=3292.0.0+nightly-20220706-2100
+FLATCAR_VERSION=3294.0.0+krnowak-packages-all-arch-job-test
+FLATCAR_VERSION_ID=3294.0.0
+FLATCAR_BUILD_ID="krnowak-packages-all-arch-job-test"
+FLATCAR_SDK_VERSION=3294.0.0+krnowak-packages-all-arch-job-test
